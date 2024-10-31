@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * @author 徐一杰
  * @date 2024/10/31 16:24
- * @description
+ * @description 与数据库 user 表映射
  */
 @Data
 public class User {

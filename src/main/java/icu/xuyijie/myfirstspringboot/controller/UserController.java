@@ -20,6 +20,10 @@ import java.util.List;
 @Slf4j
 public class UserController {
     //private final Logger log = LoggerFactory.getLogger(UserController.class)
+
+    /**
+     * 注入 UserMapper
+     */
     @Autowired
     private UserMapper userMapper;
 
