@@ -54,14 +54,14 @@ public class UserController {
     public String register(String username, String password, String rePassword, Model model) {
         log.info("前端传来参数：{} - {} - {}", username, password, rePassword);
 
-
         // 两次输入密码不一致的情况
         if (!Objects.equals(password, rePassword)) {
             model.addAttribute("registerMsg", "两次输入密码不一致");
             return "index";
         }
 
-        // 用户名已注册的情况
+        // 用户名已注册的情况：从数据库中查询前端传开的 username 是否已经被注册，被注册的话提示用户
+
 
         // 把数据塞入数据库
         User user = new User();
@@ -69,6 +69,7 @@ public class UserController {
         user.setPassword(password);
         userMapper.insertUser(user);
 
+        // 提示用户注册成功
         model.addAttribute("msg", "注册成功，请登录");
 
         return "index";
