@@ -1,6 +1,7 @@
 package icu.xuyijie.myfirstspringboot.mapper;
 
 import icu.xuyijie.myfirstspringboot.entity.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -22,4 +23,12 @@ public interface UserMapper {
      */
     @Select("SELECT * FROM user WHERE username = #{username11} AND password = #{password}")
     List<User> findUserByUsernameAndPassword(@Param("username11") String username, String password);
+
+    /**
+     * 插入数据
+     * @param user user 对象
+     * @return 插入的条数
+     */
+    @Insert("INSERT INTO user (username, password, create_time) VALUES (#{username}, #{password}, CURRENT_TIMESTAMP)")
+    int insertUser(User user);
 }
