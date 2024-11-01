@@ -15,8 +15,11 @@ import java.util.List;
  * @date 2024/10/31 15:29
  * @description
  */
+// url 映射
 @RequestMapping("/user")
+// 表明这是一个 spring boot 控制器
 @Controller
+// 自动生成日志打印器代码
 @Slf4j
 public class UserController {
     //private final Logger log = LoggerFactory.getLogger(UserController.class)
@@ -29,7 +32,7 @@ public class UserController {
 
     @RequestMapping("/login")
     public String login(String username, String password, Model model) {
-        log.info("前端输入的用户名是：{},前端输入的密码是：{}", username, password);
+        log.info("前端输入的用户名是：{}，前端输入的密码是：{}", username, password);
 
         // 根据用户名和密码查询用户
         List<User> userList = userMapper.findUserByUsernameAndPassword(username, password);
