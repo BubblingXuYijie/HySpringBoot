@@ -29,18 +29,20 @@ public class UserController {
 
     @RequestMapping("/login")
     public String login(String username, String password, Model model) {
-        List<User> userList = userMapper.findAll();
-        System.out.println(userList);
-
         log.info("前端输入的用户名是：{},前端输入的密码是：{}", username, password);
 
-        if ("1".equals(username) && "1".equals(password)) {
-            log.info("登录成功");
-        } else {
+        // 根据用户名和密码查询用户
+        List<User> userList = userMapper.findUserByUsernameAndPassword(username, password);
+
+        // 如果查询不到对应用户，登录失败
+        if (userList.isEmpty()) {
             log.error("登录失败");
             model.addAttribute("msg", "登录失败");
+        } else {
+            log.info("登录成功");
         }
 
+        // 保持页面处在登录页
         return "index";
     }
 

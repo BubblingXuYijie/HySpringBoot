@@ -2,6 +2,7 @@ package icu.xuyijie.myfirstspringboot.mapper;
 
 import icu.xuyijie.myfirstspringboot.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     /**
-     * 查询全部用户
-     * @return 全部用户列表
+     * 根据用户名和密码查询用户
+     * @param username 用户输入的用户名
+     * @param password 用户输入的密码
+     * @return 用户列表
      */
-    @Select("SELECT * FROM user")
-    List<User> findAll();
+    @Select("SELECT * FROM user WHERE username = #{username11} AND password = #{password}")
+    List<User> findUserByUsernameAndPassword(@Param("username11") String username, String password);
 }
