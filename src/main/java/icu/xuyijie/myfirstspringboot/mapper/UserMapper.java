@@ -30,7 +30,7 @@ public interface UserMapper {
      * @return 用户列表
      */
     @Select("SELECT * FROM user WHERE username = #{username}")
-    User findUserByUsername(String username);
+    List<User> findUserByUsername(String username);
 
     /**
      * 插入数据
