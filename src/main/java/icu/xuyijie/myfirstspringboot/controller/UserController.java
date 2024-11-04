@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * @author 徐一杰
  * @date 2024/10/31 15:29
- * @description
+ * @description 用户相关的请求
  */
 // url 映射
 @RequestMapping("/user")
@@ -44,6 +44,8 @@ public class UserController {
             model.addAttribute("msg", "登录失败");
         } else {
             log.info("登录成功");
+            // 重定向
+            return "redirect:/student/getStudentList";
         }
 
         // 保持页面处在登录页

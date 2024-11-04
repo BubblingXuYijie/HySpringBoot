@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息列表</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+            text-align: center;
+            background-color: #6abb91;
+        }
+
+        th {
+            background-color: #ccc;
+        }
+
+        td {
+            border: 1px solid #ccc;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .headDiv {
+            height: 50px;
+            width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newButton {
+            position: absolute;
+            right: 0;
+            bottom: 10px;
+            height: 30px;
+            width: 100px;
+            background-color: cadetblue;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .searchInput {
+            position: absolute;
+            left: 0;
+            height: 30px;
+            border: none;
+            border-radius: 10px;
+            padding: 0 10px 0 10px;
+            bottom: 10px;
+        }
+
+        .searchButton {
+            position: absolute;
+            right: 0;
+            bottom: 10px;
+            background-color: #eeb4be;
+            width: 50px;
+        }
+
+        .searchDiv {
+            height: 50px;
+            width: 250px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<h1>学生信息列表</h1>
+<button><a th:href="@{/student}">学生列表</a></button>
+<button><a th:href="@{/teacher}">教师列表</a></button>
+<div class="headDiv">
+    <div class="searchDiv">
+        <form th:action="@{/student}" method="get">
+            <input class="searchInput" type="text" name="searchString" placeholder="输入内容进行模糊匹配">
+            <input type="submit" value="搜索" class="searchButton newButton">
+        </form>
+    </div>
+    <button class="newButton" style="right: 120px;background-color: coral">
+        <a th:href="@{/outputData}">导出</a>
+    </button>
+    <button class="newButton">
+        <a th:href="@{/goEditStudent}">新增</a>
+    </button>
+</div>
+<table>
+    <thead>
+    <th style="width: 50px">ID</th>
+    <th style="width: 100px">照片</th>
+    <th style="width: 100px">姓名</th>
+    <th style="width: 100px">学号</th>
+    <th style="width: 100px">性别</th>
+    <th style="width: 100px">年龄</th>
+    <th style="width: 100px">班级</th>
+    <th style="width: 100px">班主任</th>
+    <th style="width: 200px">入学时间</th>
+    <th style="width: 100px">是否毕业</th>
+    <th style="width: 200px">操作</th>
+    </thead>
+    <tbody>
+    <!-- dataList是 StudentServlet 里面设置的值，是数据库里查询出的数据，下面语法是循环取出，每取出一条就生成一行表格 -->
+    <tr th:each="data : ${dataList}">
+        <td th:text="${data.id}">1</td>
+        <td>
+            <!--th:if 里面的条件如果成立，就显示当前标签。否则隐藏--->
+            <form th:if="${data.img_url} == null or ${data.img_url} == ''" th:action="@{/upload}" method="post"
+                  enctype="multipart/form-data">
+                <!--这个input设为hidden，不显示出来，用于上传文件时携带 id 信息，方便更新数据库-->
+                <input type="text" name="id" hidden="hidden" th:value="${data.id}">
+                请选择文件:
+                <input id="uploadInput" type="file" name="file"/>
+                <br/>
+                <input type="submit" value="上传" onclick="return isFileEmpty()">
+            </form>
+            <img th:if="${not #strings.isEmpty(data.img_url)}" th:src="${data.img_url}" alt="" width="100px"
+                 height="100px">
+        </td>
+        <td th:text="${data.name}">徐一杰</td>
+        <td th:text="${data.stu_id}"></td>
+        <td>[[${data.sex}]]</td>
+        <td th:text="${data.age}">24</td>
+        <td th:text="${data.class}">1班</td>
+        <td th:text="${data.teacherName}"></td>
+        <td th:text="${data.create_time}">2018</td>
+        <td th:text="${data.is_graduate} == 1 ? '是' : '否'">是</td>
+        <td>
+            <button>
+                <!-- 小括号里的写法意思是请求 /goEditStudent 是传递参数过去，观察浏览器地址栏拼接的URL是 /goEditStudent?id=1&name=xyj... -->
+                <a th:href="@{/goEditStudent(id=${data.id}, name=${data.name}, stuId=${data.stu_id}, sex=${data.sex}, age=${data.age}, class=${data.class}, isGraduate=${data.is_graduate}, teacher=${data.teacher})}">编辑</a>
+            </button>
+            <button>
+                <a th:href="@{/delStudent(stuId=${data.id})}">删除</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!--<div>-->
+<!--    &lt;!&ndash; pageNo 是当前页码，从0开始的，0是第一页 &ndash;&gt;-->
+<!--    <button th:if="${pageNo} > 0"><a th:href="@{/student(pageNo=${pageNo} - 1)}">上一页</a></button>-->
+<!--    <button th:each="i : ${pageList}">-->
+<!--        <a th:href="@{/student(pageNo=${i} - 1)}">[[${i}]]</a>-->
+<!--    </button>-->
+<!--    &lt;!&ndash; pageTotal 是页码总数量 &ndash;&gt;-->
+<!--    <button th:if="${pageNo} < ${pageTotal} - 1"><a th:href="@{/student(pageNo=${pageNo} + 1)}">下一页</a></button>-->
+<!--</div>-->
+
+<script>
+    /**
+     * 点击上传按钮时检查文件是否为空
+     * @returns {boolean} 文件是否为空
+     */
+    function isFileEmpty() {
+        const uploadInput = document.getElementById('uploadInput')
+        const files = uploadInput.files
+        if (!files || files.length === 0) {
+            alert('请先选择文件再点击上传')
+            return false;
+        }
+        return true
+    }
+</script>
+</body>
+</html>
