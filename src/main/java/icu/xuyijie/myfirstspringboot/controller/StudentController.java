@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author 徐一杰
  * @date 2024/11/4 13:45
- * @description
+ * @description 学生相关操作
  */
 @Controller
 @RequestMapping("/student")
