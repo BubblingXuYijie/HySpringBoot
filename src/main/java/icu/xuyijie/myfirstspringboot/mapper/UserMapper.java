@@ -25,6 +25,14 @@ public interface UserMapper {
     List<User> findUserByUsernameAndPassword(@Param("username11") String username, String password);
 
     /**
+     * 根据用户名查询用户
+     * @param username 用户输入的用户名
+     * @return 用户列表
+     */
+    @Select("SELECT * FROM user WHERE username = #{username}")
+    User findUserByUsername(String username);
+
+    /**
      * 插入数据
      * @param user user 对象
      * @return 插入的条数

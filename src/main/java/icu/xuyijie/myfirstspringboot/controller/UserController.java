@@ -60,8 +60,12 @@ public class UserController {
             return "index";
         }
 
-        // 用户名已注册的情况：从数据库中查询前端传开的 username 是否已经被注册，被注册的话提示用户
-
+        // 用户名已注册的情况：从数据库中查询前端传来的 username 是否已经被注册，被注册的话提示用户
+        User repeatUser = userMapper.findUserByUsername(username);
+        if (repeatUser != null) {
+            model.addAttribute("registerMsg", "用户名已注册，请更换");
+            return "index";
+        }
 
         // 把数据塞入数据库
         User user = new User();
