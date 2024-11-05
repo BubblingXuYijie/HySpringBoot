@@ -1,6 +1,10 @@
 package icu.xuyijie.myfirstspringboot.mapper;
 
+import icu.xuyijie.myfirstspringboot.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author 徐一杰
@@ -9,5 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface StudentMapper {
-
+    @Select("SELECT s.*,t.name as teacherName FROM `student` s LEFT JOIN teacher t ON t.id = s.teacher;")
+    List<Student> getStuentList();
 }

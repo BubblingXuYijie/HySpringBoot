@@ -111,7 +111,7 @@
         <td th:text="${data.id}">1</td>
         <td>
             <!--th:if 里面的条件如果成立，就显示当前标签。否则隐藏--->
-            <form th:if="${data.img_url} == null or ${data.img_url} == ''" th:action="@{/upload}" method="post"
+            <form th:if="${data.imgUrl} == null or ${data.imgUrl} == ''" th:action="@{/upload}" method="post"
                   enctype="multipart/form-data">
                 <!--这个input设为hidden，不显示出来，用于上传文件时携带 id 信息，方便更新数据库-->
                 <input type="text" name="id" hidden="hidden" th:value="${data.id}">
@@ -120,21 +120,21 @@
                 <br/>
                 <input type="submit" value="上传" onclick="return isFileEmpty()">
             </form>
-            <img th:if="${not #strings.isEmpty(data.img_url)}" th:src="${data.img_url}" alt="" width="100px"
+            <img th:if="${not #strings.isEmpty(data.imgUrl)}" th:src="${data.imgUrl}" alt="" width="100px"
                  height="100px">
         </td>
         <td th:text="${data.name}">徐一杰</td>
-        <td th:text="${data.stu_id}"></td>
+        <td th:text="${data.stuId}"></td>
         <td>[[${data.sex}]]</td>
         <td th:text="${data.age}">24</td>
-        <td th:text="${data.class}">1班</td>
-        <td th:text="${data.teacherName}"></td>
-        <td th:text="${data.create_time}">2018</td>
-        <td th:text="${data.is_graduate} == 1 ? '是' : '否'">是</td>
+        <td th:text="${data.className}">1班</td>
+        <td th:text="${data.teacher}"></td>
+        <td th:text="${data.createTime}">2018</td>
+        <td th:text="${data.isGraduate} == 1 ? '是' : '否'">是</td>
         <td>
             <button>
                 <!-- 小括号里的写法意思是请求 /goEditStudent 是传递参数过去，观察浏览器地址栏拼接的URL是 /goEditStudent?id=1&name=xyj... -->
-                <a th:href="@{/goEditStudent(id=${data.id}, name=${data.name}, stuId=${data.stu_id}, sex=${data.sex}, age=${data.age}, class=${data.class}, isGraduate=${data.is_graduate}, teacher=${data.teacher})}">编辑</a>
+                <a th:href="@{/goEditStudent(id=${data.id}, name=${data.name}, stuId=${data.stuId}, sex=${data.sex}, age=${data.age}, class=${data.className}, isGraduate=${data.isGraduate}, teacher=${data.teacher})}">编辑</a>
             </button>
             <button>
                 <a th:href="@{/delStudent(stuId=${data.id})}">删除</a>
