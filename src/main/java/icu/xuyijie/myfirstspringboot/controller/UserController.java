@@ -44,7 +44,7 @@ public class UserController {
             model.addAttribute("msg", "登录失败");
         } else {
             log.info("登录成功");
-            // 重定向
+            // 重定向到 /student/getStudentList
             return "redirect:/student/getStudentList";
         }
 

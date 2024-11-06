@@ -13,6 +13,10 @@ import java.util.List;
  */
 @Mapper
 public interface StudentMapper {
+    /**
+     * 查询学生列表
+     * @return 学生列表
+     */
     @Select("SELECT s.*,t.name as teacherName FROM `student` s LEFT JOIN teacher t ON t.id = s.teacher;")
     List<Student> getStuentList();
 }

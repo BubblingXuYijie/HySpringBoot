@@ -30,6 +30,7 @@ public class StudentController {
         // 2 赋值给页面展示
         model.addAttribute("dataList", studentList);
 
+        // 3 跳转到 studentList.html 页面
         return "studentList";
     }
 }
