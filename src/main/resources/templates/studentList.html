@@ -129,8 +129,8 @@
         <td th:text="${data.age}">24</td>
         <td th:text="${data.className}">1班</td>
         <td th:text="${data.teacher}"></td>
-        <td th:text="${data.createTime}">2018</td>
-        <td th:text="${data.isGraduate} == 1 ? '是' : '否'">是</td>
+        <td th:text="${#dates.format(data.createTime, 'yyyy-MM-dd HH:mm:ss')}">2018</td>
+        <td th:text="${data.isGraduate} ? '是' : '否'">是</td>
         <td>
             <button>
                 <!-- 小括号里的写法意思是请求 /goEditStudent 是传递参数过去，观察浏览器地址栏拼接的URL是 /goEditStudent?id=1&name=xyj... -->

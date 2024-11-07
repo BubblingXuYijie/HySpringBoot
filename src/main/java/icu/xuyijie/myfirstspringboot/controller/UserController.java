@@ -42,14 +42,12 @@ public class UserController {
         if (userList.isEmpty()) {
             log.error("登录失败");
             model.addAttribute("msg", "登录失败");
-        } else {
-            log.info("登录成功");
-            // 重定向到 /student/getStudentList
-            return "redirect:/student/getStudentList";
+            return "index";
         }
 
-        // 保持页面处在登录页
-        return "index";
+        log.info("登录成功");
+        // 重定向到 /student/getStudentList
+        return "redirect:/student/getStudentList";
     }
 
     @RequestMapping("/register")
