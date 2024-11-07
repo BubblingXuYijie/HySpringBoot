@@ -33,4 +33,16 @@ public class StudentController {
         // 3 跳转到 studentList.html 页面
         return "studentList";
     }
+
+    @RequestMapping("/delStudent")
+    public String delStudent(Integer id1) {
+        log.info("前端传来id：{}", id1);
+
+        // 1、删除数据
+        studentMapper.deleteStudent(id1);
+
+        // 2、重新加载页面
+        return "redirect:/student/getStudentList";
+    }
+
 }

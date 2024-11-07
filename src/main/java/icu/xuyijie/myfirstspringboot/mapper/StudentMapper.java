@@ -1,6 +1,7 @@
 package icu.xuyijie.myfirstspringboot.mapper;
 
 import icu.xuyijie.myfirstspringboot.entity.Student;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -19,4 +20,13 @@ public interface StudentMapper {
      */
     @Select("SELECT s.id,s.name,s.age,s.sex,s.teacher,s.img_url,s.stu_id,s.create_time,s.is_graduate,s.class AS className,t.name AS teacherName FROM `student` s LEFT JOIN teacher t ON t.id = s.teacher;")
     List<Student> getStuentList();
+
+    /**
+     * 根据 id 删除数据
+     * @param id 前端传来的 id
+     * @return 删除的行数
+     */
+    @Delete("DELETE FROM student WHERE id = #{id}")
+    int deleteStudent(int id);
+
 }

@@ -137,7 +137,7 @@
                 <a th:href="@{/goEditStudent(id=${data.id}, name=${data.name}, stuId=${data.stuId}, sex=${data.sex}, age=${data.age}, class=${data.className}, isGraduate=${data.isGraduate}, teacher=${data.teacher})}">编辑</a>
             </button>
             <button>
-                <a th:href="@{/delStudent(stuId=${data.id})}">删除</a>
+                <a th:href="@{/student/delStudent(id1=${data.id})}">删除</a>
             </button>
         </td>
     </tr>
