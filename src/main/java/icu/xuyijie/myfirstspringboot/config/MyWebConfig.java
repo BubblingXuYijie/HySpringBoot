@@ -24,14 +24,12 @@ public class MyWebConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         // 登录界面
                         "/",
-                        "index.html",
                         // 登录接口
                         "/user/login",
                         // 注册接口
                         "/user/register",
                         // 静态资源
-                        "/backgroundImage.jpg",
-                        "static/**"
+                        "/*.jpg"
                 );
     }
 }
