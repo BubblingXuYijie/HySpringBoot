@@ -2,6 +2,7 @@ package icu.xuyijie.myfirstspringboot.controller;
 
 import icu.xuyijie.myfirstspringboot.entity.User;
 import icu.xuyijie.myfirstspringboot.mapper.UserMapper;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class UserController {
     private UserMapper userMapper;
 
     @RequestMapping("/login")
-    public String login(String username, String password, Model model) {
+    public String login(String username, String password, Model model, HttpSession session) {
         log.info("前端输入的用户名是：{}，前端输入的密码是：{}", username, password);
 
         // 根据用户名和密码查询用户
@@ -46,6 +47,8 @@ public class UserController {
         }
 
         log.info("登录成功");
+        // 设置标识，已登录
+        session.setAttribute("isLogin", true);
         // 重定向到 /student/getStudentList
         return "redirect:/student/getStudentList";
     }
