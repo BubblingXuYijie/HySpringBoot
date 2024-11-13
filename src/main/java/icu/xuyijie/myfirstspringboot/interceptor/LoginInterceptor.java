@@ -15,15 +15,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("进入登录拦截器");
+        log.info("进入登录拦截器，url：{}", request.getRequestURI());
         // 获取 session
         HttpSession session = request.getSession();
         Object isLogin = session.getAttribute("isLogin");
 
-        if (isLogin == null || !(boolean) isLogin) {
-            // 未登录，获取拦截的 url
-            String requestUri = request.getRequestURI();
-            log.error("未登录，拦截url：{}", requestUri);
+        if (isLogin == null) {
+            log.error("未登录");
             // 重定向到登录界面
             response.sendRedirect("/");
             return false;
