@@ -29,7 +29,8 @@ public class MyWebConfig implements WebMvcConfigurer {
                         // 注册接口
                         "/user/register",
                         // 静态资源
-                        "/*.jpg"
+                        "/*.jpg",
+                        "/error"
                 );
     }
 }

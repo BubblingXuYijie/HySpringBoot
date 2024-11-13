@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -32,7 +33,12 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/login")
+    // RequestMapping 可以接收 GET 何 POST 请求
+    //@RequestMapping("/login")
+    // 只接收 GET 请求
+    //@GetMapping("/login")
+    // 只接收 POST 请求
+    @PostMapping("/login")
     public String login(String username, String password, Model model, HttpSession session) {
         log.info("前端输入的用户名是：{}，前端输入的密码是：{}", username, password);
 
@@ -53,7 +59,7 @@ public class UserController {
         return "redirect:/student/getStudentList";
     }
 
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public String register(String username, String password, String rePassword, Model model) {
         log.info("前端传来参数：{} - {} - {}", username, password, rePassword);
 
