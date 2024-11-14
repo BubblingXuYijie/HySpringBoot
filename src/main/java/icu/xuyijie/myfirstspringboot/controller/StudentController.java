@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,9 +25,11 @@ public class StudentController {
     private StudentMapper studentMapper;
 
     @GetMapping("/getStudentList")
-    public String getStudentList(Model model) {
+    public String getStudentList(Model model, String name, @RequestParam(name = "class", required = false) String className) {
+        log.info("查询参数：{}--{}", name, className);
+
         // 1 查询学生数据
-        List<Student> studentList = studentMapper.getStuentList();
+        List<Student> studentList = studentMapper.getStuentList(name, className);
 
         // 2 赋值给页面展示
         model.addAttribute("dataList", studentList);

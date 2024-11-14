@@ -58,6 +58,16 @@
             bottom: 10px;
         }
 
+        .searchInput2 {
+            position: absolute;
+            left: 200px;
+            height: 30px;
+            border: none;
+            border-radius: 10px;
+            padding: 0 10px 0 10px;
+            bottom: 10px;
+        }
+
         .searchButton {
             position: absolute;
             right: 0;
@@ -68,7 +78,7 @@
 
         .searchDiv {
             height: 50px;
-            width: 250px;
+            width: 450px;
             position: relative;
         }
     </style>
@@ -79,8 +89,9 @@
 <button><a th:href="@{/teacher}">教师列表</a></button>
 <div class="headDiv">
     <div class="searchDiv">
-        <form th:action="@{/student}" method="get">
-            <input class="searchInput" type="text" name="searchString" placeholder="输入内容进行模糊匹配">
+        <form th:action="@{/student/getStudentList}" method="get">
+            <input class="searchInput" type="text" name="name" placeholder="输入姓名">
+            <input class="searchInput2" type="text" name="class" placeholder="输入班级">
             <input type="submit" value="搜索" class="searchButton newButton">
         </form>
     </div>
