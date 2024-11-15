@@ -49,4 +49,15 @@ public class StudentController {
         return "redirect:/student/getStudentList";
     }
 
+    @GetMapping("/goEditStudent")
+    public String goEditStudent(Model model) {
+        model.addAttribute("student", new Student());
+        return "addStudent";
+    }
+
+    @GetMapping("/saveStudent")
+    public String saveStudent() {
+
+    }
+
 }
