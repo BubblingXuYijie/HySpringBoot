@@ -2,6 +2,7 @@ package icu.xuyijie.myfirstspringboot.mapper;
 
 import icu.xuyijie.myfirstspringboot.entity.Student;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -28,5 +29,8 @@ public interface StudentMapper {
      */
     @Delete("DELETE FROM student WHERE id = #{id}")
     int deleteStudent(int id);
+
+    //@Insert("INSERT INTO student (name, sex, age, stu_id, class, is_graduate, create_time) VALUES (#{name}, #{sex}, #{age}, #{stuId}, #{className}, #{isGraduate}, CURRENT_TIMESTAMP)")
+    int addStudent(Student student);
 
 }

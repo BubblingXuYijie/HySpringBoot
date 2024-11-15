@@ -52,7 +52,7 @@
     <!--id不允许修改，使用 disabled 属性禁用修改-->
     <span>ID：</span><input type="text" name="id" th:value="${student.id}" readonly placeholder="新增无需填写此字段"><br>
     <span>姓名：</span><input type="text" name="name" th:value="${student.name}" required><br>
-    <span>学号：</span><input type="text" name="stu111" th:value="${student.stuId}" required><br>
+    <span>学号：</span><input type="text" name="stuId" th:value="${student.stuId}" required><br>
     <span>年龄：</span><input type="number" name="age" th:value="${student.age}" required><br>
     <span>性别：</span>
     <label>
@@ -66,7 +66,7 @@
         <input type="radio" name="sex" value="人妖" th:checked="${student.sex} == '人妖'">人妖<br>
     </label>
     <span>班级：</span>
-    <select name="stuClass" th:value="${student.className}">
+    <select name="className" th:value="${student.className}">
         <!-- selected 是下拉选择框的属性，后面的值为 true 时选中当前选项-->
         <option value="软开1班" th:selected="${student.className} == '软开1班'">软开1班</option>
         <option value="软开2班" th:selected="${student.className} == '软开2班'">软开2班</option>

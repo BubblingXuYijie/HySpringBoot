@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="icu.xuyijie.myfirstspringboot.mapper.StudentMapper">
 
+    <insert id="addStudent">
+        INSERT INTO student
+            (name, sex, age, stu_id, class, is_graduate, create_time)
+        VALUES
+            (#{name}, #{sex}, #{age}, #{stuId}, #{className}, #{isGraduate}, CURRENT_TIMESTAMP)
+    </insert>
+
     <select id="getStuentList" resultType="icu.xuyijie.myfirstspringboot.entity.Student">
         SELECT s.id,
                s.name,

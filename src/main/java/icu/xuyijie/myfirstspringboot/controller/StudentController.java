@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -55,9 +56,16 @@ public class StudentController {
         return "addStudent";
     }
 
-    @GetMapping("/saveStudent")
-    public String saveStudent() {
+    @PostMapping("/saveStudent")
+    public String saveStudent(Student student) {
+        // 参数接收
+        log.info("表单参数：{}", student);
 
+        // 保存到数据库
+        studentMapper.addStudent(student);
+
+        // 刷新列表页
+        return "redirect:/student/getStudentList";
     }
 
 }
