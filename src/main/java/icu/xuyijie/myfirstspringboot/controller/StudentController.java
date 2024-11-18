@@ -30,7 +30,7 @@ public class StudentController {
         log.info("查询参数：{}--{}", name, className);
 
         // 1 查询学生数据
-        List<Student> studentList = studentMapper.getStuentList(name, className);
+        List<Student> studentList = studentMapper.getStudentList(name, className);
 
         // 2 赋值给页面展示
         model.addAttribute("dataList", studentList);

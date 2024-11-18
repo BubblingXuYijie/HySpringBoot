@@ -9,7 +9,7 @@
             (#{name}, #{sex}, #{age}, #{stuId}, #{className}, #{isGraduate}, CURRENT_TIMESTAMP)
     </insert>
 
-    <select id="getStuentList" resultType="icu.xuyijie.myfirstspringboot.entity.Student">
+    <select id="getStudentList" resultType="icu.xuyijie.myfirstspringboot.entity.Student">
         SELECT s.id,
                s.name,
                s.age,

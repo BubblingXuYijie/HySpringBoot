@@ -20,7 +20,7 @@ public interface StudentMapper {
      * @return 学生列表
      */
     //@Select("SELECT s.id,s.name,s.age,s.sex,s.teacher,s.img_url,s.stu_id,s.create_time,s.is_graduate,s.class AS className,t.name AS teacherName FROM `student` s LEFT JOIN teacher t ON t.id = s.teacher WHERE s.name = #{name} AND s.class = #{className};")
-    List<Student> getStuentList(String name, String className);
+    List<Student> getStudentList(String name, String className);
 
     /**
      * 根据 id 删除数据
