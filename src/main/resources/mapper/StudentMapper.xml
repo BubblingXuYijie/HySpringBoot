@@ -9,6 +9,18 @@
             (#{name}, #{sex}, #{age}, #{stuId}, #{className}, #{isGraduate}, CURRENT_TIMESTAMP)
     </insert>
 
+    <update id="updateStudent">
+        UPDATE student
+        SET name        = #{name},
+            age         = #{age},
+            sex         = #{sex},
+            is_graduate = #{isGraduate},
+            stu_id      = #{stuId},
+            class       = #{className},
+            teacher     = #{teacher}
+        WHERE id = #{id}
+    </update>
+
     <select id="getStudentList" resultType="icu.xuyijie.myfirstspringboot.entity.Student">
         SELECT s.id,
                s.name,

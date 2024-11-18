@@ -33,4 +33,6 @@ public interface StudentMapper {
     //@Insert("INSERT INTO student (name, sex, age, stu_id, class, is_graduate, create_time) VALUES (#{name}, #{sex}, #{age}, #{stuId}, #{className}, #{isGraduate}, CURRENT_TIMESTAMP)")
     int addStudent(Student student);
 
+    int updateStudent(Student student);
+
 }

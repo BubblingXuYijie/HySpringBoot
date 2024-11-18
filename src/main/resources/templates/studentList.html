@@ -145,7 +145,7 @@
         <td>
             <button>
                 <!-- 小括号里的写法意思是请求 /goEditStudent 是传递参数过去，观察浏览器地址栏拼接的URL是 /goEditStudent?id=1&name=xyj... -->
-                <a th:href="@{/goEditStudent(id=${data.id}, name=${data.name}, stuId=${data.stuId}, sex=${data.sex}, age=${data.age}, class=${data.className}, isGraduate=${data.isGraduate}, teacher=${data.teacher})}">编辑</a>
+                <a th:href="@{/student/goEditStudent(id=${data.id}, name=${data.name}, stuId=${data.stuId}, sex=${data.sex}, age=${data.age}, class=${data.className}, isGraduate=${data.isGraduate}, teacher=${data.teacher})}">编辑</a>
             </button>
             <button>
                 <a th:href="@{/student/delStudent(id1=${data.id})}">删除</a>

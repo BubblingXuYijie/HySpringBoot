@@ -51,8 +51,9 @@ public class StudentController {
     }
 
     @GetMapping("/goEditStudent")
-    public String goEditStudent(Model model) {
-        model.addAttribute("student", new Student());
+    public String goEditStudent(Model model, Student student) {
+        log.info("前端传来学生数据：{}", student);
+        model.addAttribute("student", student);
         return "addStudent";
     }
 
@@ -61,8 +62,14 @@ public class StudentController {
         // 参数接收
         log.info("表单参数：{}", student);
 
-        // 保存到数据库
-        studentMapper.addStudent(student);
+        // 新增操作
+        if (student.getId() == null) {
+            // 保存到数据库
+            studentMapper.addStudent(student);
+        } else {
+            // 更新操作
+            studentMapper.updateStudent(student);
+        }
 
         // 刷新列表页
         return "redirect:/student/getStudentList";
