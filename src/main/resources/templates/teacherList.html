@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师信息列表</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+            text-align: center;
+            background-color: #6abb91;
+        }
+
+        th {
+            background-color: #ccc;
+        }
+
+        td {
+            border: 1px solid #ccc;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .headDiv {
+            height: 50px;
+            width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newButton {
+            position: absolute;
+            right: 0;
+            bottom: 10px;
+            height: 30px;
+            width: 100px;
+            background-color: cadetblue;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .searchInput {
+            position: absolute;
+            left: 0;
+            height: 30px;
+            border: none;
+            border-radius: 10px;
+            padding: 0 10px 0 10px;
+            bottom: 10px;
+        }
+
+        .searchButton {
+            position: absolute;
+            right: 0;
+            bottom: 10px;
+            background-color: #eeb4be;
+            width: 50px;
+        }
+
+        .searchDiv {
+            height: 50px;
+            width: 250px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<h1>教师信息列表</h1>
+<button><a th:href="@{/student/getStudentList}">学生列表</a></button>
+<button><a th:href="@{/teacher/getTeachList}">教师列表</a></button>
+<div class="headDiv">
+    <div class="searchDiv">
+        <form th:action="@{/teacher}" method="get">
+            <input class="searchInput" type="text" name="searchString" placeholder="输入内容进行模糊匹配">
+            <input type="submit" value="搜索" class="searchButton newButton">
+        </form>
+    </div>
+    <button class="newButton" style="right: 120px;background-color: coral">
+        <a th:href="@{/outputTeacherData}">导出</a>
+    </button>
+    <button class="newButton">
+        <a th:href="@{/goEditTeacher}">新增</a>
+    </button>
+</div>
+<table>
+    <thead>
+    <th style="width: 50px">ID</th>
+    <th style="width: 100px">姓名</th>
+    <th style="width: 100px">性别</th>
+    <th style="width: 200px">入职时间</th>
+    <th style="width: 200px">操作</th>
+    </thead>
+    <tbody>
+    <!-- dataList是 StudentServlet 里面设置的值，是数据库里查询出的数据，下面语法是循环取出，每取出一条就生成一行表格 -->
+    <tr th:each="data : ${dataList}">
+        <td th:text="${data.id}">1</td>
+        <td th:text="${data.name}">徐一杰</td>
+        <td>[[${data.sex}]]</td>
+        <td th:text="${#dates.format(data.createTime, 'yyyy-MM-dd HH:mm:ss')}">2018</td>
+        <td>
+            <button>
+                <!-- 小括号里的写法意识是请求 /goEditStudent 是传递参数过去，观察浏览器地址栏拼接的URL是 /goEditStudent?id=1&name=xyj... -->
+                <a th:href="@{/goEditTeacher(id=${data.id}, name=${data.name}, sex=${data.sex})}">编辑</a>
+            </button>
+            <button>
+                <a th:href="@{/delTeacher(id=${data.id})}">删除</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+
+</script>
+</body>
+</html>
