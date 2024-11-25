@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface TeacherMapper {
 
-    //@Select("SELECT * FROM teacher")
+    @Select("SELECT * FROM teacher")
     List<Teacher> findAll();
 
 }
