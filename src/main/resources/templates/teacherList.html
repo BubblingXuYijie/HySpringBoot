@@ -79,7 +79,7 @@
 <button><a th:href="@{/teacher/getTeachList}">教师列表</a></button>
 <div class="headDiv">
     <div class="searchDiv">
-        <form th:action="@{/teacher}" method="get">
+        <form th:action="@{/teacher/getTeachList}" method="get">
             <input class="searchInput" type="text" name="searchString" placeholder="输入内容进行模糊匹配">
             <input type="submit" value="搜索" class="searchButton newButton">
         </form>
@@ -88,7 +88,7 @@
         <a th:href="@{/outputTeacherData}">导出</a>
     </button>
     <button class="newButton">
-        <a th:href="@{/goEditTeacher}">新增</a>
+        <a th:href="@{/teacher/goEditTeacher}">新增</a>
     </button>
 </div>
 <table>
@@ -109,7 +109,7 @@
         <td>
             <button>
                 <!-- 小括号里的写法意识是请求 /goEditStudent 是传递参数过去，观察浏览器地址栏拼接的URL是 /goEditStudent?id=1&name=xyj... -->
-                <a th:href="@{/goEditTeacher(id=${data.id}, name=${data.name}, sex=${data.sex})}">编辑</a>
+                <a th:href="@{/teacher/goEditTeacher(id=${data.id}, name=${data.name}, sex=${data.sex})}">编辑</a>
             </button>
             <button>
                 <a th:href="@{/delTeacher(id=${data.id})}">删除</a>

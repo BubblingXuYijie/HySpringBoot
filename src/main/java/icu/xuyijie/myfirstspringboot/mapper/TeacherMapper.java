@@ -4,6 +4,7 @@ import icu.xuyijie.myfirstspringboot.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,7 +15,11 @@ import java.util.List;
 @Mapper
 public interface TeacherMapper {
 
-    @Select("SELECT * FROM teacher")
-    List<Teacher> findAll();
+    //@Select("SELECT * FROM teacher WHERE name LIKE CONCAT('%', #{searchString}, '%')")
+    List<Teacher> findAll(String searchString);
+
+    int addTeacher(String name, String sex, Date createTime);
+
+    int updateTeacher(Integer id, String name, String sex);
 
 }
