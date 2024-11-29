@@ -23,4 +23,8 @@
             sex         = #{sex}
         WHERE id = #{id}
     </update>
+
+    <delete id="delTeacher">
+        DELETE FROM teacher WHERE id = #{idParam}
+    </delete>
 </mapper>

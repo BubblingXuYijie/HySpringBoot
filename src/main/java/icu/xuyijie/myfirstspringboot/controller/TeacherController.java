@@ -59,4 +59,11 @@ public class TeacherController {
         return "redirect:/teacher/getTeachList";
     }
 
+    @GetMapping("/delTeacher")
+    public String delTeacher(Integer id){
+        teacherMapper.delTeacher(id);
+        // 刷新列表页
+        return "redirect:/teacher/getTeachList";
+    }
+
 }

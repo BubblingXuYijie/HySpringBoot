@@ -22,4 +22,6 @@ public interface TeacherMapper {
 
     int updateTeacher(Integer id, String name, String sex);
 
+    int delTeacher(Integer idParam);
+
 }
