@@ -74,6 +74,11 @@
         <option value="软开4班" th:selected="${student.className} == '软开4班'">软开4班</option>
     </select><br>
 
+    <span>辅导员</span>
+    <select name="teacher" th:value="${student.className}">
+        <option th:each="teacher : ${teacherList}" th:value="${teacher.id}">[[${teacher.name}]]</option>
+    </select><br>
+
     <span>毕业：</span>
     <label>
         <input type="radio" name="isGraduate" value="1" th:checked="${student.isGraduate} == 1">是

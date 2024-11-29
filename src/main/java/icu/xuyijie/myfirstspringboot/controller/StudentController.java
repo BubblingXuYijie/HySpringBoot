@@ -1,7 +1,9 @@
 package icu.xuyijie.myfirstspringboot.controller;
 
 import icu.xuyijie.myfirstspringboot.entity.Student;
+import icu.xuyijie.myfirstspringboot.entity.Teacher;
 import icu.xuyijie.myfirstspringboot.mapper.StudentMapper;
+import icu.xuyijie.myfirstspringboot.mapper.TeacherMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentMapper studentMapper;
+    @Autowired
+    private TeacherMapper teacherMapper;
 
     @GetMapping("/getStudentList")
     public String getStudentList(Model model, String name, @RequestParam(name = "class", required = false) String className) {
@@ -54,6 +58,12 @@ public class StudentController {
     public String goEditStudent(Model model, Student student) {
         log.info("前端传来学生数据：{}", student);
         model.addAttribute("student", student);
+
+        // 查询所以教师数据
+        List<Teacher> teacherList = teacherMapper.findAll(null);
+        // model 给前端页面
+        model.addAttribute("teacherList", teacherList);
+
         return "addStudent";
     }
 

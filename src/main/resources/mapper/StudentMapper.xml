@@ -4,9 +4,9 @@
 
     <insert id="addStudent">
         INSERT INTO student
-            (name, sex, age, stu_id, class, is_graduate, create_time)
+            (name, sex, age, stu_id, class, is_graduate, create_time, teacher)
         VALUES
-            (#{name}, #{sex}, #{age}, #{stuId}, #{className}, #{isGraduate}, CURRENT_TIMESTAMP)
+            (#{name}, #{sex}, #{age}, #{stuId}, #{className}, #{isGraduate}, CURRENT_TIMESTAMP, #{teacher})
     </insert>
 
     <update id="updateStudent">
