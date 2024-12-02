@@ -13,10 +13,7 @@
         <result column="is_graduate" property="isGraduate" jdbcType="TINYINT" />
         <result column="class" property="className" jdbcType="VARCHAR" />
         <association property="teacherInfo" javaType="icu.xuyijie.myfirstspringboot.entity.Teacher">
-            <id column="id" property="id" jdbcType="INTEGER" />
-            <result column="name" property="name" jdbcType="VARCHAR" />
-            <result column="sex" property="sex" jdbcType="INTEGER" />
-            <result column="create_time" property="createTime" jdbcType="INTEGER" />
+            <result column="teacherName" property="name" jdbcType="VARCHAR" />
         </association>
     </resultMap>
 
@@ -41,7 +38,7 @@
 
     <select id="getStudentList" resultMap="map1">
         SELECT
-            s.*,t.name
+            s.*,t.name AS teacherName
         FROM `student` s
                  LEFT JOIN teacher t ON t.id = s.teacher
         <where>
