@@ -12,7 +12,7 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="is_graduate" property="isGraduate" jdbcType="TINYINT" />
         <result column="class" property="className" jdbcType="VARCHAR" />
-        <association property="teacherInfo" javaType="icu.xuyijie.myfirstspringboot.entity.Teacher">
+        <association property="teacherInfo">
             <result column="teacherName" property="name" jdbcType="VARCHAR" />
         </association>
     </resultMap>
