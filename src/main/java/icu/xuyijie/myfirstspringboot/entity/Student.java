@@ -21,4 +21,6 @@ public class Student {
     private Integer teacher;
     private Boolean isGraduate;
     private Date createTime;
+
+    private Teacher teacherInfo;
 }

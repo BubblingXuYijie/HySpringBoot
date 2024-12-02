@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="icu.xuyijie.myfirstspringboot.mapper.StudentMapper">
+    <resultMap id="map1" type="icu.xuyijie.myfirstspringboot.entity.Student">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="age" property="age" jdbcType="INTEGER" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="teacher" property="teacher" jdbcType="INTEGER" />
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="stu_id" property="stuId" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="is_graduate" property="isGraduate" jdbcType="TINYINT" />
+        <result column="class" property="className" jdbcType="VARCHAR" />
+        <association property="teacherInfo" javaType="icu.xuyijie.myfirstspringboot.entity.Teacher">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="name" property="name" jdbcType="VARCHAR" />
+            <result column="sex" property="sex" jdbcType="INTEGER" />
+            <result column="create_time" property="createTime" jdbcType="INTEGER" />
+        </association>
+    </resultMap>
 
     <insert id="addStudent">
         INSERT INTO student
@@ -21,18 +39,9 @@
         WHERE id = #{id}
     </update>
 
-    <select id="getStudentList" resultType="icu.xuyijie.myfirstspringboot.entity.Student">
-        SELECT s.id,
-               s.name,
-               s.age,
-               s.sex,
-               s.teacher,
-               s.img_url,
-               s.stu_id,
-               s.create_time,
-               s.is_graduate,
-               s.class AS className,
-               t.name  AS teacherName
+    <select id="getStudentList" resultMap="map1">
+        SELECT
+            s.*,t.name
         FROM `student` s
                  LEFT JOIN teacher t ON t.id = s.teacher
         <where>
