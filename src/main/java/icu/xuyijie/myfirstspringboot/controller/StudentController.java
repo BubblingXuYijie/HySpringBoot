@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -80,6 +83,24 @@ public class StudentController {
             // 更新操作
             studentMapper.updateStudent(student);
         }
+
+        // 刷新列表页
+        return "redirect:/student/getStudentList";
+    }
+
+    @PostMapping("/upload")
+    public String upload(MultipartFile multipartFile, Integer id) throws IOException {
+        String filename = multipartFile.getOriginalFilename();
+        log.info("上传文件：{}--id：{}", filename, id);
+
+        // 保存前端上传的文件
+        File saveFile = new File("E:/uploadFiles/" + filename);
+        multipartFile.transferTo(saveFile);
+
+        Student student = new Student();
+        student.setId(id);
+        student.setImgUrl("http://127.0.0.1:8080/file/" + filename);
+        studentMapper.updateStudent(student);
 
         // 刷新列表页
         return "redirect:/student/getStudentList";

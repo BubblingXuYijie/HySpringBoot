@@ -122,12 +122,12 @@
         <td th:text="${data.id}">1</td>
         <td>
             <!--th:if 里面的条件如果成立，就显示当前标签。否则隐藏--->
-            <form th:if="${data.imgUrl} == null or ${data.imgUrl} == ''" th:action="@{/upload}" method="post"
+            <form th:if="${data.imgUrl} == null or ${data.imgUrl} == ''" th:action="@{/student/upload}" method="post"
                   enctype="multipart/form-data">
                 <!--这个input设为hidden，不显示出来，用于上传文件时携带 id 信息，方便更新数据库-->
                 <input type="text" name="id" hidden="hidden" th:value="${data.id}">
                 请选择文件:
-                <input id="uploadInput" type="file" name="file"/>
+                <input id="uploadInput" type="file" name="multipartFile"/>
                 <br/>
                 <input type="submit" value="上传" onclick="return isFileEmpty()">
             </form>
@@ -171,12 +171,12 @@
      * @returns {boolean} 文件是否为空
      */
     function isFileEmpty() {
-        const uploadInput = document.getElementById('uploadInput')
-        const files = uploadInput.files
-        if (!files || files.length === 0) {
-            alert('请先选择文件再点击上传')
-            return false;
-        }
+        // const uploadInput = document.getElementById('uploadInput')
+        // const files = uploadInput.files
+        // if (!files || files.length === 0) {
+        //     alert('请先选择文件再点击上传')
+        //     return false;
+        // }
         return true
     }
 </script>

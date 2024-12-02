@@ -2,7 +2,11 @@ server:
   # 项目启动端口
   port: 8080
 
+
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
   # 数据库连接
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
