@@ -3,6 +3,7 @@ package icu.xuyijie.myfirstspringboot.config;
 import icu.xuyijie.myfirstspringboot.interceptor.LoginInterceptor;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -13,6 +14,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // 代表这个类是 springboot 的配置类
 @SpringBootConfiguration
 public class MyWebConfig implements WebMvcConfigurer {
+
+    /**
+     * 静态资源映射
+     * @param registry 映射关系
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/file/**").addResourceLocations("file:E:/uploadFiles/");
+    }
+
+    /**
+     * 配置拦截器
+     * @param registry 拦截器内容
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry
@@ -30,7 +45,9 @@ public class MyWebConfig implements WebMvcConfigurer {
                         "/user/register",
                         // 静态资源
                         "/*.jpg",
-                        "/error"
+                        "/file/*.png",
+                        "/error",
+                        "/favicon.ico"
                 );
     }
 }
