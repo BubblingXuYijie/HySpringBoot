@@ -21,6 +21,7 @@ public class MyWebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // 这一行意思：把电脑本机的 E:/uploadFiles/ 下的所有文件，配置成 http://127.0.0.1:8080/file/文件名 的访问方式
         registry.addResourceHandler("/file/**").addResourceLocations("file:E:/uploadFiles/");
     }
 
