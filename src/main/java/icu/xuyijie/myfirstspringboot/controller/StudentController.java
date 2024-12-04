@@ -34,8 +34,6 @@ public class StudentController {
 
     @GetMapping("/getStudentList")
     public String getStudentList(Model model, String name, @RequestParam(name = "class", required = false) String className) {
-        log.info("查询参数：{}--{}", name, className);
-
         // 1 查询学生数据
         List<Student> studentList = studentMapper.getStudentList(name, className);
 
@@ -48,8 +46,6 @@ public class StudentController {
 
     @GetMapping("/delStudent")
     public String delStudent(Integer id1) {
-        log.info("前端传来id：{}", id1);
-
         // 1、删除数据
         studentMapper.deleteStudent(id1);
 
@@ -59,7 +55,6 @@ public class StudentController {
 
     @GetMapping("/goEditStudent")
     public String goEditStudent(Model model, Student student) {
-        log.info("前端传来学生数据：{}", student);
         model.addAttribute("student", student);
 
         // 查询所以教师数据
@@ -72,9 +67,6 @@ public class StudentController {
 
     @PostMapping("/saveStudent")
     public String saveStudent(Student student) {
-        // 参数接收
-        log.info("表单参数：{}", student);
-
         // 新增操作
         if (student.getId() == null) {
             // 保存到数据库

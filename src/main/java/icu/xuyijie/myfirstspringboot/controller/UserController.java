@@ -40,8 +40,6 @@ public class UserController {
     // 只接收 POST 请求
     @PostMapping("/login")
     public String login(String username, String password, Model model, HttpSession session) {
-        log.info("前端输入的用户名是：{}，前端输入的密码是：{}", username, password);
-
         // 根据用户名和密码查询用户
         List<User> userList = userMapper.findUserByUsernameAndPassword(username, password);
 
@@ -61,8 +59,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(String username, String password, String rePassword, Model model) {
-        log.info("前端传来参数：{} - {} - {}", username, password, rePassword);
-
         // 两次输入密码不一致的情况
         if (!Objects.equals(password, rePassword)) {
             model.addAttribute("registerMsg", "两次输入密码不一致");

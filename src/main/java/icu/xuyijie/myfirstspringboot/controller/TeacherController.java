@@ -28,8 +28,6 @@ public class TeacherController {
 
     @GetMapping("/getTeachList")
     public String getTeachList(Model model, String searchString){
-        log.info("教师列表，查询参数：{}", searchString);
-
         // 查询数据库教师信息并给到前端页面
         List<Teacher> teacherList = teacherMapper.findAll(searchString);
         model.addAttribute("dataList", teacherList);
@@ -39,7 +37,6 @@ public class TeacherController {
 
     @GetMapping("/goEditTeacher")
     public String goEditTeacher(Model model, Teacher teacher){
-        log.info("前端传来教师数据：{}", teacher);
         model.addAttribute("tc", teacher);
         return "addTeacher";
     }
