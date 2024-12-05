@@ -48,7 +48,8 @@ public class MyWebConfig implements WebMvcConfigurer {
                         "/*.jpg",
                         "/file/*",
                         "/error",
-                        "/favicon.ico"
+                        "/favicon.ico",
+                        "/test/**"
                 );
     }
 }
