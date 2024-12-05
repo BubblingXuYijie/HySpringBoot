@@ -2,6 +2,7 @@ package icu.xuyijie.myfirstspringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author 徐一杰
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description 主启动类
  */
 @SpringBootApplication
+@EnableTransactionManagement
 public class MyFirstSpringBootApplication {
 
     public static void main(String[] args) {

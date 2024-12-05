@@ -46,7 +46,7 @@ public class MyWebConfig implements WebMvcConfigurer {
                         "/user/register",
                         // 静态资源
                         "/*.jpg",
-                        "/file/*.png",
+                        "/file/*",
                         "/error",
                         "/favicon.ico"
                 );

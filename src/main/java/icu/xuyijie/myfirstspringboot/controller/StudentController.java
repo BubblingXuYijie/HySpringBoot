@@ -7,6 +7,7 @@ import icu.xuyijie.myfirstspringboot.mapper.TeacherMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,18 +82,19 @@ public class StudentController {
     }
 
     @PostMapping("/upload")
+    @Transactional(rollbackFor = Exception.class)
     public String upload(MultipartFile multipartFile, Integer id) throws IOException {
         String filename = multipartFile.getOriginalFilename();
         log.info("上传文件：{}--id：{}", filename, id);
-
-        // 保存前端上传的文件
-        File saveFile = new File("E:/uploadFiles/" + filename);
-        multipartFile.transferTo(saveFile);
 
         Student student = new Student();
         student.setId(id);
         student.setImgUrl("http://127.0.0.1:8080/file/" + filename);
         studentMapper.updateStudent(student);
+
+        // 保存前端上传的文件
+        File saveFile = new File("E:/uploadFiles/" + filename);
+        multipartFile.transferTo(saveFile);
 
         // 刷新列表页
         return "redirect:/student/getStudentList";
