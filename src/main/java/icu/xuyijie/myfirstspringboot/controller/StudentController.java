@@ -105,7 +105,7 @@ public class StudentController {
     }
 
     @GetMapping("/outputData")
-    public String outputData(HttpServletResponse resp) throws IOException {
+    public void outputData(HttpServletResponse resp) throws IOException {
         // 查询要导出的学生数据
         List<Student> studentList = studentMapper.getStudentList(null, null);
 
@@ -122,9 +122,6 @@ public class StudentController {
                 .write(resp.getOutputStream(), Student.class)
                 .sheet("学生信息1")
                 .doWrite(studentList);
-
-        // 刷新列表页
-        return "studentList";
     }
 
 }
