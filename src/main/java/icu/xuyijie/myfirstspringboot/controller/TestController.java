@@ -1,5 +1,10 @@
 package icu.xuyijie.myfirstspringboot.controller;
 
+import icu.xuyijie.myfirstspringboot.entity.Test;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/test")
+@Validated
 public class TestController {
 
     @GetMapping("/a")
@@ -39,6 +45,19 @@ public class TestController {
     @GetMapping("/f/{name}")
     public String f(@PathVariable String name) {
         return name;
+    }
+
+    @GetMapping("/g")
+    public String g(
+            @NotNull(message = "姓名不能为空") String name,
+            @Email(message = "邮件格式不正确") @NotNull String email,
+            @Range(min = 0, max = 10, message = "数据范围超出") Integer count) {
+        return name;
+    }
+
+    @GetMapping("/h")
+    public Test h(@Validated Test test) {
+        return test;
     }
 
 }
