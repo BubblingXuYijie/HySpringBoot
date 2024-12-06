@@ -1,9 +1,11 @@
 package icu.xuyijie.myfirstspringboot.controller;
 
+import com.alibaba.excel.EasyExcelFactory;
 import icu.xuyijie.myfirstspringboot.entity.Student;
 import icu.xuyijie.myfirstspringboot.entity.Teacher;
 import icu.xuyijie.myfirstspringboot.mapper.StudentMapper;
 import icu.xuyijie.myfirstspringboot.mapper.TeacherMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -98,6 +102,29 @@ public class StudentController {
 
         // 刷新列表页
         return "redirect:/student/getStudentList";
+    }
+
+    @GetMapping("/outputData")
+    public String outputData(HttpServletResponse resp) throws IOException {
+        // 查询要导出的学生数据
+        List<Student> studentList = studentMapper.getStudentList(null, null);
+
+        // 告诉浏览器，我要给你什么格式的数据
+        resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        resp.setCharacterEncoding("utf-8");
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("学生数据excel", StandardCharsets.UTF_8);
+        // 设置下载的文件名
+        resp.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+
+        EasyExcelFactory
+                // resp.getOutputStream 是让浏览器直接下载
+                .write(resp.getOutputStream(), Student.class)
+                .sheet("学生信息1")
+                .doWrite(studentList);
+
+        // 刷新列表页
+        return "studentList";
     }
 
 }
