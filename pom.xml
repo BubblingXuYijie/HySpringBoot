@@ -19,6 +19,12 @@
     </properties>
 
     <dependencies>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
         <!-- 提供 excel 导入导出功能 -->
         <dependency>
             <groupId>com.alibaba</groupId>

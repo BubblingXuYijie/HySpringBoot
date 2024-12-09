@@ -1,6 +1,9 @@
 package icu.xuyijie.myfirstspringboot.controller;
 
 import com.alibaba.excel.EasyExcelFactory;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.page.PageMethod;
 import icu.xuyijie.myfirstspringboot.entity.Student;
 import icu.xuyijie.myfirstspringboot.entity.Teacher;
 import icu.xuyijie.myfirstspringboot.mapper.StudentMapper;
@@ -21,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,15 +42,35 @@ public class StudentController {
     private TeacherMapper teacherMapper;
 
     @GetMapping("/getStudentList")
-    public String getStudentList(Model model, String name, @RequestParam(name = "class", required = false) String className) {
-        // 1 查询学生数据
-        List<Student> studentList = studentMapper.getStudentList(name, className);
+    public String getStudentList(Model model, String name, String className, @RequestParam(defaultValue = "1") Integer pageNo) {
+        // 这一行会自动拦截 studentMapper 的所有查询，为查询添加上分页函数
+        try (Page<Student> page = PageMethod.startPage(pageNo, 5)) {
+            // 箭头函数，lambda表达式
+            page.doSelectPage(() -> studentMapper.getStudentList(name, className));
 
-        // 2 赋值给页面展示
-        model.addAttribute("dataList", studentList);
+            // 获取分页查询所需参数值
+            PageInfo<Student> pageInfo = new PageInfo<>(page);
+            // 获取查询到学生数据
+            List<Student> dataList = pageInfo.getList();
 
-        // 3 跳转到 studentList.html 页面
-        return "studentList";
+            // 2 赋值给页面展示
+            model.addAttribute("dataList", dataList);
+            // 获取当前页面
+            model.addAttribute("pageNo", pageInfo.getPageNum());
+            // 获取一共分为多少页
+            int pages = pageInfo.getPages();
+            model.addAttribute("pageTotal", pages);
+
+            // 页码列表，里面是 1，2，3，4。。。
+            List<Long> pageList = new ArrayList<>();
+            for (long i = 0; i < pages; i++) {
+                pageList.add(i + 1);
+            }
+            model.addAttribute("pageList", pageList);
+
+            // 3 跳转到 studentList.html 页面
+            return "studentList";
+        }
     }
 
     @GetMapping("/delStudent")

@@ -155,15 +155,15 @@
     </tbody>
 </table>
 
-<!--<div>-->
-<!--    &lt;!&ndash; pageNo 是当前页码，从0开始的，0是第一页 &ndash;&gt;-->
-<!--    <button th:if="${pageNo} > 0"><a th:href="@{/student(pageNo=${pageNo} - 1)}">上一页</a></button>-->
-<!--    <button th:each="i : ${pageList}">-->
-<!--        <a th:href="@{/student(pageNo=${i} - 1)}">[[${i}]]</a>-->
-<!--    </button>-->
-<!--    &lt;!&ndash; pageTotal 是页码总数量 &ndash;&gt;-->
-<!--    <button th:if="${pageNo} < ${pageTotal} - 1"><a th:href="@{/student(pageNo=${pageNo} + 1)}">下一页</a></button>-->
-<!--</div>-->
+<div>
+    <!-- pageNo 是当前页码，从1开始的，1是第一页 -->
+    <button th:if="${pageNo} > 1"><a th:href="@{/student/getStudentList(pageNo=${pageNo} - 1)}">上一页</a></button>
+    <button th:each="i : ${pageList}">
+        <a th:href="@{/student/getStudentList(pageNo=${i})}">[[${i}]]</a>
+    </button>
+    <!-- pageTotal 是页码总数量 -->
+    <button th:if="${pageNo} < ${pageTotal}"><a th:href="@{/student/getStudentList(pageNo=${pageNo} + 1)}">下一页</a></button>
+</div>
 
 <script>
     /**
