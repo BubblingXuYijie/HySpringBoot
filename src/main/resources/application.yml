@@ -2,7 +2,6 @@ server:
   # 项目启动端口
   port: 8080
 
-
 spring:
   servlet:
     multipart:
