@@ -139,7 +139,7 @@
         <td>[[${data.sex}]]</td>
         <td th:text="${data.age}">24</td>
         <td th:text="${data.className}">1班</td>
-        <td th:text="${data.teacherInfo.name}"></td>
+        <td th:text="${data.teacherInfo?.name}"></td>
         <td th:text="${#dates.format(data.createTime, 'yyyy-MM-dd HH:mm:ss')}">2018</td>
         <td th:text="${data.isGraduate} ? '是' : '否'">是</td>
         <td>
